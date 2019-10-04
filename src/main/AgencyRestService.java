@@ -44,9 +44,9 @@ public class AgencyRestService {
 		return gson.toJson(list, type);
 	}
 	
-	// http://localhost:9090/JSP-DAY4/rs/agency/getagency/{agencyid}
+	// http://localhost:9090/JSP-DAY4/rs/agency/getagencyagents/{agencyid}
 	@GET
-	@Path("/getagency/{agency}")
+	@Path("/getagencyagents/{agencyid}")
     @Produces(MediaType.APPLICATION_JSON)
 	public String getAgency(@PathParam("agencyid") int agencyId) 
 	{

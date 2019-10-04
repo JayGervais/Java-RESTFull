@@ -11,7 +11,7 @@ public class SimpleRestServiceApplication  extends Application {
 	private Set<Object> singletons = new HashSet<Object>();
 	 
 	public SimpleRestServiceApplication() {
-		singletons.add(new SimpleRestService());
+		singletons.add(new AgentRestService());
 		singletons.add(new AgencyRestService());
 	}
  

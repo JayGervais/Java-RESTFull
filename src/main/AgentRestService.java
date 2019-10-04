@@ -27,7 +27,7 @@ import model.Agent;
 
 
 @Path("/agent")
-public class SimpleRestService {
+public class AgentRestService {
 
 	// http://localhost:9090/JSP-DAY4/rs/agent/getallagents
 	@GET
@@ -43,6 +43,25 @@ public class SimpleRestService {
 		Type type = new TypeToken<List<Agent>>() {}.getType();
 		return gson.toJson(list, type);
 	}
+	
+	// http://localhost:9090/JSP-DAY4/rs/agent/getagencyagents/{agencyid}
+	@GET
+	@Path("/getagencyagents/{agencyid}")
+    @Produces(MediaType.APPLICATION_JSON)
+	public String getAgencyAgents(@PathParam("agencyid") int agencyid) 
+	{
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("JSP-DAY4");
+		EntityManager em = factory.createEntityManager();
+		Query query = (Query) em.createQuery("select a from Agent a where a.agencyId=" + agencyid);
+		List<Agent> list = (List<Agent>) query.getResultList();
+		Gson gson = new Gson();
+		Type type = new TypeToken<List<Agent>>() {}.getType();
+		
+		return gson.toJson(list, type);
+	}
+	
+	
+	
 	
 	// http://localhost:9090/JSP-DAY4/rs/agent/getagent/{agentid}
 	@GET
