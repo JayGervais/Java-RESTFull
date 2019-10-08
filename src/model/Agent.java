@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -16,13 +15,29 @@ public class Agent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int agentId;
+
 	private String agtBusPhone;
+
 	private String agtEmail;
+
 	private String agtFirstName;
+
 	private String agtLastName;
+
 	private String agtMiddleInitial;
+
 	private String agtPosition;
+
+	private String password;
+
+	private String userid;
+
+	//bi-directional many-to-one association to Agency
+	@ManyToOne
+	@JoinColumn(name="AgencyId")
+	private Agency agency;
 
 	public Agent() {
 	}
@@ -83,17 +98,28 @@ public class Agent implements Serializable {
 		this.agtPosition = agtPosition;
 	}
 
-	public Agent(int agentId, String agtBusPhone, String agtEmail, String agtFirstName, String agtLastName,
-			String agtMiddleInitial, String agtPosition) {
-		super();
-		this.agentId = agentId;
-		this.agtBusPhone = agtBusPhone;
-		this.agtEmail = agtEmail;
-		this.agtFirstName = agtFirstName;
-		this.agtLastName = agtLastName;
-		this.agtMiddleInitial = agtMiddleInitial;
-		this.agtPosition = agtPosition;
+	public String getPassword() {
+		return this.password;
 	}
-	
-	
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUserid() {
+		return this.userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public Agency getAgency() {
+		return this.agency;
+	}
+
+	public void setAgency(Agency agency) {
+		this.agency = agency;
+	}
+
 }

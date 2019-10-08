@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -15,6 +16,7 @@ public class Agency implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int agencyId;
 
 	private String agncyAddress;
@@ -30,6 +32,10 @@ public class Agency implements Serializable {
 	private String agncyPostal;
 
 	private String agncyProv;
+
+	//bi-directional many-to-one association to Agent
+	@OneToMany(mappedBy="agency")
+	private List<Agent> agents;
 
 	public Agency() {
 	}
@@ -96,6 +102,28 @@ public class Agency implements Serializable {
 
 	public void setAgncyProv(String agncyProv) {
 		this.agncyProv = agncyProv;
+	}
+
+	public List<Agent> getAgents() {
+		return this.agents;
+	}
+
+	public void setAgents(List<Agent> agents) {
+		this.agents = agents;
+	}
+
+	public Agent addAgent(Agent agent) {
+		getAgents().add(agent);
+		agent.setAgency(this);
+
+		return agent;
+	}
+
+	public Agent removeAgent(Agent agent) {
+		getAgents().remove(agent);
+		agent.setAgency(null);
+
+		return agent;
 	}
 
 }

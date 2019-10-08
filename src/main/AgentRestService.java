@@ -60,9 +60,6 @@ public class AgentRestService {
 		return gson.toJson(list, type);
 	}
 	
-	
-	
-	
 	// http://localhost:9090/JSP-DAY4/rs/agent/getagent/{agentid}
 	@GET
 	@Path("/getagent/{agentid}")
